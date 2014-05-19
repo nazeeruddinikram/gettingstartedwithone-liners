@@ -2,5 +2,4 @@
 
 Extract fields 2, 4, and 5 from file.txt:
 
-{lang=bash}
     awk '{print $2,$4,$5}' input.txt
