@@ -91,7 +91,8 @@ If you are interested in both sub folder size and file size in the current direc
 
 #### Display the top ten running processes sorted by memory usage
 
-`$ ps aux | sort -nk +4 | tail`
+{lang="awk"}
+    $ ps aux | sort -nk +4 | tail
 
 This is certainly not the best way to display the top ten processes that consume the most memory, but, hey, it works.
 
@@ -104,7 +105,8 @@ If I was to find out who consumes the most memory, I'd simply use `htop` or `top
 
 #### Show cpu load in percent
 
-`sed -e 's/ .*//' -e 's/\.//' -e 's/^0*//' /proc/loadavg`
+{lang="awk"}
+    $ sed -e 's/ .*//' -e 's/\.//' -e 's/^0*//' /proc/loadavg
 
 
 This shows the current load of the CPU as a percentage.
