@@ -1,5 +1,6 @@
-# Chapter 2
+# awk
 
-It was a **bold** and *italic* night!
+Extract fields 2, 4, and 5 from file.txt:
 
-Suddenly, a shot rang out!
+{lang=bash}
+    awk '{print $2,$4,$5}' input.txt

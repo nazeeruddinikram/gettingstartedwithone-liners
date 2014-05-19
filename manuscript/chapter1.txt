@@ -1,24 +1,46 @@
-# Chapter 1 - Bash
-
 ##  Bash
-This first chapter covers common bash oneliners
+This first chapter covers common bash one liners
 
----
-####  Run the previous shell command but replace every "foo" with "bar"
+----
 
-`$ !!:gs/foo/bar`
+####  Run the previous shell command, but replace every "foo" with "bar"
 
-what happens here is that the `!!` recalls the previous executed shell command and `:gs/foo/ba`r substitutes (the `:s` flag) all (the `g` flag) occurrences of foo with bar. The `!!` construct is called an event designator.
+{lang=bash}
+    $ !!:gs/foo/bar
+
+What happens here is that the `!!` recalls the previous executed shell command
+and `:gs/foo/bar` substitutes (the `:s` flag) all (the `g` flag) occurrences of
+foo with bar.
+
+Note: The `!!` construct is called an event designator.
 
 ----
 
 #### Top for files
 
-`$ watch -d -n 1 'df; ls -FlAt /path'`
+{lang=bash}
+    $ watch -d -n 1 'df; ls -FlAt /path'
 
-This one-liner watches for file changes in directory /path. It uses the watch command that executes the given command periodically. The `-d` flag tells watch to display differences between the command calls (so you saw what files get added or removed in /path). The `-n 1` flag tells it to execute the command every second.
+This one-liner watches for file changes in directory /path. It uses the watch
+command that executes the given command periodically. The `-d` flag tells watch
+to display differences between the command calls (so you saw what files get
+added or removed in /path). The `-n 1` flag tells it to execute the command
+every second.
 
-The command to execute is `df; ls -FlAt /path` that is actually two commands, executed one after other. First, `df` outputs the filesystem disk space usage, and then `ls -FlAt` lists the files in `/path`. The `-F` argument to ls tells it to classify files, appending `*/=>@|` to the filenames to indicate whether they are executables `*`, directories `/`, `sockets =`, `doors >`, `symlinks @`, or named pipes `|`. The `-l` argument lists all files, `-A` hides `.` and `..`, and `-t` sorts the files by time.
+The command to execute is..
+
+{lang=bash}
+    df; ls -FlAt /path
+
+that is actually two commands, executed one after other.
+First, *df* outputs the filesystem disk space usage, and then *ls -FlAt*
+lists the files in */path*.
+
+The *-F* argument to ls tells it to classify files, appending *\*/=>@|* to the
+filenames to indicate whether they are executables 
+`*`, directories `/`, `sockets =`, `doors >`, `symlinks @`, or named pipes `|`.
+The `-l` argument lists all files, `-A` hides `.` and `..`, and `-t` sorts
+the files by time.
 
 Special note about doors - they are Solaris thing that act like pipes, except they launch the program that is supposed to be the receiving party. A plain pipe would block until the other party opens it, but a door launches the other party itself.
 
