@@ -1,5 +1,5 @@
 # Bash
-This first chapter covers common bash one liners
+This first chapter covers common bash one liners.
 
 ----
 
@@ -47,6 +47,8 @@ Actually the output is nicer if you specify `-h` argument to `df` so it was huma
 `$ watch -dn1 'df -h; ls -FlAt /path'`
 
 Another note - `-d` in BSD is `--differences`
+
+{pagebreak}
 
 ----
 

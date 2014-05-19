@@ -6,9 +6,8 @@ Peteris Krumins' blog : http://www.catonmat.net/blog/
 
 Perl one-liners:
 http://www.math.harvard.edu/computing/perl/oneliners.txt
-A part is adapted from such a list by
-Tom Christianson, one of the authors of "Programming Perl".
-
+A part is adapted from such a list by Tom Christianson, one of the authors of
+"Programming Perl".
 
 Ruby one-liners:
 http://reference.jumpingmonkey.org/programming_languages/ruby/ruby-one-liners.html
