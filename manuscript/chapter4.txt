@@ -1,0 +1,43 @@
+# Python
+
+
+
+---
+####  Serve the current directory at http://localhost:8000/
+
+`$ python -m SimpleHTTPServer`
+
+This one-liner starts a web server on port 8000 with the contents of current directory on all the interfaces (address 0.0.0.0), not just localhost. If you have `"index.html"` or `"index.htm"` files, it will serve those, otherwise it will list the contents of the currently working directory.
+
+It works because python comes with a standard module called `SimpleHTTPServer`. The `-m` argument makes python to search for a module named `SimpleHTTPServer.py` in all the possible system locations (listed in `sys.path` and `$PYTHONPATH` shell variable). Once found, it executes it as a script. If you look at the source code of this module, you'll find that this module tests if it's run as a script `if __name__ == '__main__'`, and if it is, it runs the `test()` method that makes it run a web server in the current directory.
+
+To use a different port, specify it as the next argument:
+
+`$ python -m SimpleHTTPServer 8080`
+
+This command runs a HTTP server on all local interfaces on port 8080.
+
+
+---
+####  Want to know many bytes a terabyte is? If you know further abbreviations, you can extend the list.
+
+`import pprint;pprint.pprint(zip(('Byte', 'KByte', 'MByte', 'GByte', 'TByte'), (1 << 10*i for i in xrange(5))))`
+
+---
+####  Print every line from an input file but remove the first two fields.
+
+`python -c "import sys;[sys.stdout.write(' '.join(line.split(' ')[2:])) for line in sys.stdin]" < input.txt`
+
+
+---
+####  echo unicode character
+
+`python -c "print unichr(234)"`
+
+This script echos "ê"
+
+
+---
+####  CSV file to json
+
+`python -c "import csv,json;print json.dumps(list(csv.reader(open('csv_file.csv'))))"`

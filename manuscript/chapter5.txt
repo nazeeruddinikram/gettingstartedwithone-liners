@@ -1,0 +1,111 @@
+# Ruby
+
+
+# File Spacing
+---
+#### double space a file
+`$  ruby -pe 'puts' < file.txt`
+
+---
+#### triple space a file
+`$  ruby -pe '2.times {puts}' < file.txt`
+
+---
+#### undo double-spacing (w/ and w/o whitespace in lines)
+`$  ruby -lne 'BEGIN{$/="\n\n"}; puts $_' < file.txt`
+
+`$  ruby -ne 'BEGIN{$/="\n\n"}; puts $_.chomp' < file.txt`
+
+`$  ruby -e 'puts STDIN.readlines.to_s.gsub(/\n\n/, "\n")' < file.txt`
+
+---
+
+# Numbering
+
+---
+
+#### number each line of a file (left justified).
+`$  ruby -ne 'printf("-%6s%s", $., $_)' < file.txt`
+
+---
+
+#### number each line of a file (right justified).
+`$  ruby -ne 'printf("%6s%s", $., $_)' < file.txt`
+
+---
+
+#### number each line of a file, only print non-blank lines
+`$  ruby -e 'while gets; end; puts $.' < file.txt`
+
+---
+
+#### count lines (emulates 'wc -l')
+`$  ruby -ne 'END {puts $.}' < file.txt`
+
+
+`$  ruby -e 'while gets; end; puts $.' < file.txt`
+
+
+# Text Conversion and Substitution
+
+---
+
+#### convert DOS newlines (CR/LF) to Unix format (LF)
+#### - strip newline regardless; re-print with unix EOL
+`$  ruby -ne 'BEGIN{$\="\n"}; print $_.chomp' < file.txt`
+
+#### convert Unix newlines (LF) to DOS format (CR/LF)
+#### strip newline regardless; re-print with dos EOL
+`$  ruby -ne 'BEGIN{$\="\r\n"}; print $_.chomp' < file.txt`
+
+#### delete leading whitespace (spaces/tabs/etc) from beginning of each line
+`$  ruby -pe 'gsub(/^\s+/, "")' < file.txt`
+
+#### delete trailing whitespace (spaces/tabs/etc) from end of each line
+#### strip newline regardless; replace with default platform record separator
+`$  ruby -pe 'gsub(/\s+$/, $/)' < file.txt`
+
+#### delete BOTH leading and trailing whitespace from each line
+`$  ruby -pe 'gsub(/^\s+/, "").gsub(/\s+$/, $/)' < file.txt`
+
+#### align all text flush right on a 79-column width
+`$  ruby -ne 'printf("%79s", $_)' < file.txt`
+
+#### center all text in middle of 79-column width
+`$  ruby -ne 'puts $_.chomp.center(79)' < file.txt`
+
+`$  ruby -lne 'puts $_.center(79)' < file.txt`
+
+#### substitute (find and replace) "foo" with "bar" on each line
+`$  ruby -pe 'gsub(/foo/, "bar")' < file.txt`
+
+#### substitute "foo" with "bar" ONLY for lines which contain "baz"
+`$  ruby -pe 'gsub(/foo/, "bar") if $_ =~ /baz/' < file.txt`
+
+#### substitute "foo" with "bar" EXCEPT for lines which contain "baz"
+`$  ruby -pe 'gsub(/foo/, "bar") unless $_ =~ /baz/' < file.txt`
+
+#### substitute "foo" or "bar" or "baz".... with "baq"
+`$  ruby -pe 'gsub(/(foo|bar|baz)/, "baq")' < file.txt`
+
+#### reverse order of lines (emulates 'tac') IMPROVE
+`$  ruby -ne 'BEGIN{@arr=Array.new}; @arr.push $_; END{puts @arr.reverse}' < file.txt`
+
+#### reverse each character on the line (emulates 'rev')
+`$  ruby -ne 'puts $_.chomp.reverse' < file.txt`
+
+`$  ruby -lne 'puts $_.reverse' < file.txt`
+
+#### join pairs of lines side-by-side (like 'paste')
+`$  ruby -pe '$_ = $_.chomp + " " + gets if $. % 2' < file.txt`
+
+#### if a line ends with a backslash, append the next line to it
+`$  ruby -pe 'while $_.match(/\\$/); $_ = $_.chomp.chop + gets; end' < file.txt`
+
+`$  ruby -e 'puts STDIN.readlines.to_s.gsub(/\\\n/, "")' < file.txt`
+
+#### if a line begins with an equal sign, append it to the previous line (Unix)
+`$  ruby -e 'puts STDIN.readlines.to_s.gsub(/\n=/, "")' < file.txt`
+
+#### add a blank line every 5 lines (after lines 5, 10, 15, etc)
+`$  ruby -pe 'puts if $. % 6 == 0' < file.txt`

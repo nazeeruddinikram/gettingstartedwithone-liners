@@ -1,0 +1,26 @@
+# Vi & Vim
+
+
+
+
+---
+####  Save a file you edited in vim without the needed permissions
+
+`:w !sudo tee %`
+
+This happens to me way too often. I open a system config file in vim and edit
+it just to find out that I don't have permissions to save it. This one-liner
+saves the day. Instead of writing the while to a temporary file :w /tmp/foobar
+and then moving the temporary file to the right destination mv /tmp/foobar /etc/service.conf,
+you now just type the one-liner above in vim and it will save the file.
+
+Here is how it works, if you look at the vim documentation (by typing :he :w in vim),
+you'll find the reference to the command :w !{cmd} that says that vim runs {cmd}
+and passes it the contents of the file as standard input. In this one-liner
+the {cmd} part is the sudo tee % command. It runs tee % as superuser.
+But wait, what is %? Well, it's a read-only register in vim that contains
+the filename of the current file! Therefore the command that vim executes
+becomes tee current_filename, with the current directory being whatever the
+current_file is in. Now what does tee do? The tee command takes standard input
+and write it to a file! Rephrasing, it takes the contents of the file edited in
+vim, and writes it to the file (while being root)! All done!

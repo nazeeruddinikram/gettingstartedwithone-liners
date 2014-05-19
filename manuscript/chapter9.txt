@@ -1,0 +1,20 @@
+# acknowledgements
+
+Markdown references: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#hr
+
+Peteris Krumins' blog : http://www.catonmat.net/blog/
+
+Perl one-liners:
+http://www.math.harvard.edu/computing/perl/oneliners.txt
+A part is adapted from such a list by
+Tom Christianson, one of the authors of "Programming Perl".
+
+
+Ruby one-liners:
+http://reference.jumpingmonkey.org/programming_languages/ruby/ruby-one-liners.html
+
+Python one-liners:
+https://wiki.python.org/moin/Powerful%20Python%20One-Liners
+
+Web Servers:
+https://gist.github.com/willurd/5720255

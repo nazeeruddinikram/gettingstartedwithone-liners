@@ -1,0 +1,22 @@
+# sed
+
+
+----
+
+#### Show cpu load in percent
+
+`sed -e 's/ .*//' -e 's/\.//' -e 's/^0*//' /proc/loadavg`
+
+
+This shows the current load of the CPU as a percentage.
+
+Read the load from /proc/loadavg and convert it using sed:
+
+Strip everything after the first whitespace:
+`sed -e 's/ .*//'`
+
+Delete the decimal point:
+`sed -e 's/\.//'`
+
+Remove leading zeroes:
+`sed -e 's/^0*//'`
