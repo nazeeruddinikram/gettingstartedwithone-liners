@@ -5,7 +5,7 @@ This first chapter covers common bash one liners
 
 ####  Run the previous shell command, but replace every "foo" with "bar"
 
-{lang="bash"}
+{lang="awk"}
     $ !!:gs/foo/bar
 
 What happens here is that the `!!` recalls the previous executed shell command
@@ -18,7 +18,7 @@ Note: The `!!` construct is called an event designator.
 
 #### Top for files
 
-{lang="bash"}
+{lang="awk"}
     $ watch -d -n 1 'df; ls -FlAt /path'
 
 This one-liner watches for file changes in directory /path. It uses the watch
@@ -28,7 +28,7 @@ added or removed in /path). The `-n 1` flag tells it to execute the command
 every second.
 
 The command to execute is..
-{lang="bash"}
+{lang="awk"}
     df; ls -FlAt /path
 
 that is actually two commands, executed one after other.
@@ -51,7 +51,7 @@ Another note - `-d` in BSD is `--differences`
 ----
 
 ####   Download a website recursively with wget
-{lang="bash"}
+{lang="awk"}
     $ wget --random-wait -r -p -e robots=off -U Mozilla www.example.com
 
 
@@ -73,7 +73,7 @@ Some other useful options are:
 
 #### Show the size of all sub folders in the current directory
 
-{lang="bash"}
+{lang="awk"}
     $ du -h --max-depth=1`
 
 The `--max-depth=1` causes `du` to summarize disk usage statistics for directories that are depth 1 from the current directory, that is, all directories in the current directory.
@@ -82,7 +82,7 @@ The `-h` argument makes the summary human-readable, that is, displays 5MB instea
 
 If you are interested in both sub folder size and file size in the current directory, you can use the shorter:
 
-{lang="bash"}
+{lang="awk"}
     $ du -sh *
 
 ----
