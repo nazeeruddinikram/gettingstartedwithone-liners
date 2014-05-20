@@ -3,66 +3,91 @@ This first chapter covers common bash one liners.
 
 ----
 
-####  Run the previous shell command, but replace every "foo" with "bar"
+######  Run the previous shell command, but replace every "foo" with "bar"
 
-{lang="awk"}
-    $ !!:gs/foo/bar
 
-What happens here is that the `!!` recalls the previous executed shell command
-and `:gs/foo/bar` substitutes (the `:s` flag) all (the `g` flag) occurrences of
-foo with bar.
+    $ !!:gs/bill/sue
+
+What this command is doing is as follows: 
+
+the `!!` recalls the previous shell command you executed
+and `:gs/bill/sue` substitutes, the `:s` flag,  all  the occurrences, the `g` flag, of bill with sue.
 
 Note: The `!!` construct is called an event designator.
 
 ----
 
-#### Top for files
+##### Top for files
 
-{lang="awk"}
-    $ watch -d -n 1 'df; ls -FlAt /path'
+This handy one-liner watches for file changes in directory path. It uses the `watch` command that executes the given command periodically. 
 
-This one-liner watches for file changes in directory /path. It uses the watch
-command that executes the given command periodically. The `-d` flag tells watch
-to display differences between the command calls (so you saw what files get
-added or removed in /path). The `-n 1` flag tells it to execute the command
-every second.
+The watch command syntax is
 
-The command to execute is..
-{lang="awk"}
-    df; ls -FlAt /path
+    watch [options] command [command options]
+    
+Here's an example:
 
-that is actually two commands, executed one after other.
-First, `df` outputs the filesystem disk space usage, and then `ls -FlAt`
-lists the files in `/path`
+    $ watch -d -n 5 'df; ls -FlAt /tmp'
 
-The `-F` argument to ls tells it to classify files, appending `*/=>@|` to the
-filenames to indicate whether they are executables `*`, directories `/`, `sockets =`, `doors >`, `symlinks @`, or named pipes `|`.
 
-The `-l` argument lists all files, `-A` hides `.` and `..`, and `-t` sorts the files by time.
+The option `-d` flag, tells watch to display differences between the command calls, so you see what files get added or removed in the /tmp directory. 
 
-Special note about doors - they are Solaris thing that act like pipes, except they launch the program that is supposed to be the receiving party. A plain pipe would block until the other party opens it, but a door launches the other party itself.
+The `-n 5` flag tells it to execute the command every five seconds.
 
-Actually the output is nicer if you specify `-h` argument to `df` so it was human readable. You can also join the arguments to watch together, making them `-dn1`. Here is the final version:
+The `command` passed for watch to execute is..
+
+    df; ls -FlAt /tmp
+
+This is actually two commands, seperated by the `;` executed one after other.
+
+First, `df` outputs the filesystem disk space usage, and then `ls -FlAt` lists the files in `/tmp`
+
+The `-F` argument to `ls` tells it to classify files, appending `*/=>@|` to the filenames to indicate whether they are executables `*`, directories `/`, `sockets =`, `doors >`, `symlinks @`, or named pipes `|`.
+
+The `-l` argument lists all files, `-A` hides the hidden files `.` and `..`, and finally the `-t` sorts the files by time.
+
+I> ##  Special note about `doors`
+I> They are Solaris thing that act like pipes, except they launch the I> program that is supposed to be the receiving party. A plain pipe I> would block until the other party opens it, but a door launches
+I> the other party itself.
+
+Actually the output is nicer if you specify `-h` argument to `df` so it was human readable. 
+
+You can also join the arguments to watch together, making them `-dn1`. Here is the final version:
 
 `$ watch -dn1 'df -h; ls -FlAt /path'`
 
-Another note - `-d` in BSD is `--differences`
+
+I> ## Compatability Note
+I>
+I> `-d` in BSD is `--differences`
+
+I> ## Compatability Note
+I>
+I> `watch` is a Linux command only
+
 
 {pagebreak}
 
 ----
 
-####   Download a website recursively with wget
-{lang="awk"}
+#####   Download a website recursively with wget
+
+This one-liner simply does what it says.
+
     $ wget --random-wait -r -p -e robots=off -U Mozilla www.example.com
 
 
-This one-liner does what it says. Here is the explanation of the arguments:
+ Here is the explanation of the arguments:
 
 `--random-wait` : wait between 0.5 to 1.5 seconds between requests
+
 `-r` : turn on recursive retrieving
+
 `-e robots=off` : ignore robots.txt
-`-U Mozilla` - set the "User-Agent" header to "Mozilla". Though a better choice is a real User-Agent like "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)"
+
+`-U Mozilla` - set the "User-Agent" header to "Mozilla". 
+
+Though a better choice is a real User-Agent like "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)"
 
 Some other useful options are:
 
@@ -73,66 +98,48 @@ Some other useful options are:
 
 ----
 
-#### Show the size of all sub folders in the current directory
+##### Show the size of all sub folders in the current directory
 
-{lang="awk"}
+Very handy when you need to check space usage for a set of deeply nested directories on disk.
+
     $ du -h --max-depth=1`
 
 The `--max-depth=1` causes `du` to summarize disk usage statistics for directories that are depth 1 from the current directory, that is, all directories in the current directory.
 
-The `-h` argument makes the summary human-readable, that is, displays 5MB instead of 5242880 (bytes).
+The `-h` argument makes the summary human-readable, that is, displays 5MB instead of 5242880 (bytes). Note the similarity from the *Top for files* one liner.
 
 If you are interested in both sub folder size and file size in the current directory, you can use the shorter:
 
-{lang="awk"}
+
     $ du -sh *
 
 ----
 
-#### Display the top ten running processes sorted by memory usage
+##### Display the top ten running processes, sorted by memory usage
 
-{lang="awk"}
+This is by no means the best or most efficient way to display the top ten processes that consume the most memory, but it's quick and easy and it works.
+
     $ ps aux | sort -nk +4 | tail
 
-This is certainly not the best way to display the top ten processes that consume the most memory, but, hey, it works.
+It takes the output of  the `ps aux` command, then sorts it by the 4th column, numerically,  and then uses the `tail` command to output the last lines, which are the processes with the largest memory consumption.
 
-It takes the output of `ps aux`, sorts it by 4th column numerically and then uses tail to output the last then lines which happen to be the processes with the biggest memory consumption.
-
-If I was to find out who consumes the most memory, I'd simply use `htop` or `top` and not `ps`.
+If you wanted to find out who consumes the most memory, you'd simply use `htop` or `top` and not `ps`.
 
 
 ----
 
-#### Show cpu load in percent
-
-{lang="awk"}
-    $ sed -e 's/ .*//' -e 's/\.//' -e 's/^0*//' /proc/loadavg
-
-
-This shows the current load of the CPU as a percentage.
-
-Read the load from /proc/loadavg and convert it using sed:
-
-Strip everything after the first whitespace:
-`sed -e 's/ .*//'`
-
-Delete the decimal point:
-`sed -e 's/\.//'`
-
-Remove leading zeroes:
-`sed -e 's/^0*//'`
-
-----
 
 #### Run the last command as root
 
+Just a quick note on what the `sudo` command does - it runs the command as another user, in this case, it runs the command as superuser because no other user was specified.
+
+
 `$ sudo !!`
 
-We all know what the `sudo` command does - it runs the command as another user, in this case, it runs the command as superuser because no other user was specified.
 
-But what's really interesting is the bang-bang `!!` part of the command.
+The interesting part of this one-liner is the bang-bang `!!` part  at the end of the `sudo` the command.
 
-It's called the event designator. An event designator references a command in shell's history.
+It's called the event designator. An event designator references a command in the shell's history.
 
 In this case the event designator references the previous command. Writing `!!` is the same as writing `!-1`.
 
@@ -144,12 +151,14 @@ To view all your previous commands, type `history`.
 
 #### Change to the previous working directory
 
-`$ cd -`
-
 Everyone should know this one !!
+
+`$ cd -`
 
 The dash `-` is short for "previous working directory."
 
-The previous working directory is defined by $OLDPWD shell variable. After you use the cd command, it sets the $OLDPWD environment variable, and then, if you type the short version `cd -`, it effectively becomes cd $OLDPWD and changes to the previous directory.
+The previous working directory is defined by the `$OLDPWD` shell variable. 
 
-To change to a directory named `-`, you have to either cd to the parent directory and then do `cd ./-` or do `cd /full/path/to/-`
+After you use the `cd` command, it sets the `$OLDPWD` environment variable, and then, if you type the short version `cd -`, it effectively becomes `cd $OLDPWD` and changes to the previous directory.
+
+To change to a directory named `-`, you have to either `cd` to the parent directory and then do `cd ./-` or do `cd /full/path/to/-`
