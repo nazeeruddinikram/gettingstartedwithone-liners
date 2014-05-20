@@ -5,31 +5,31 @@ Each of these commands will run an ad hoc http static server in your current (or
 
 ----
 
-#### Python 2.x
+###### Python 2.x
 
 `$ python -m SimpleHTTPServer 8000`
 
 ----
 
-#### Python 3.x
+###### Python 3.x
 
 `$ python -m http.server 8000`
 
 ----
 
-#### Ruby
+###### Ruby
 
 `$ ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => 8000, :DocumentRoot => Dir.pwd).start'`
 
 ----
 
-#### Ruby 1.9.2+
+###### Ruby 1.9.2+
 
 `$ ruby -run -ehttpd . -p8000`
 
 ----
 
-#### adsf (Ruby)
+###### adsf (Ruby)
 
 `$ gem install adsf   # install dependency`
 
@@ -38,7 +38,7 @@ Each of these commands will run an ad hoc http static server in your current (or
 
 ----
 
-#### Sinatra (Ruby)
+###### Sinatra (Ruby)
 
 `$ gem install sinatra   # install dependency`
 
@@ -46,7 +46,7 @@ Each of these commands will run an ad hoc http static server in your current (or
 
 ----
 
-#### Perl
+###### Perl
 
 `$ cpan HTTP::Server::Brick   # install dependency`
 
@@ -57,7 +57,7 @@ Credit: Anonymous Monk
 
 ----
 
-#### Plack (Perl)
+###### Plack (Perl)
 
 `$ cpan Plack   # install dependency`
 
@@ -68,7 +68,7 @@ Credit: miyagawa
 
 ----
 
-#### Mojolicious (Perl)
+###### Mojolicious (Perl)
 
 `$ cpan Mojolicious::Lite   # install dependency`
 
@@ -79,7 +79,7 @@ No directory listings.
 
 ----
 
-#### http-server (Node.js)
+###### http-server (Node.js)
 
 `$ npm install -g http-server   # install dependency`
 
@@ -89,7 +89,7 @@ Note: This server does funky things with relative paths. For example, if you hav
 
 ----
 
-#### node-static (Node.js)
+###### node-static (Node.js)
 
 `$ npm install -g node-static   # install dependency`
 
@@ -99,7 +99,7 @@ No directory listings.
 
 ----
 
-#### Erlang
+###### Erlang
 
 `$ erl -s inets -eval 'inets:start(httpd,[{server_name,"NAME"},{document_root, "."},{server_root, "."},{port, 8000},{mime_types,[{"html","text/html"},{"htm","text/html"},{"js","text/javascript"},{"css","text/css"},{"gif","image/gif"},{"jpg","image/jpeg"},{"jpeg","image/jpeg"},{"png","image/png"}]}]).'`
 

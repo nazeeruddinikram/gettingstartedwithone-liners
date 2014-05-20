@@ -1,107 +1,117 @@
 # Perl
 
-
-#### the always present hello world program, adapted to a Math department:
-
-`perl -e 'print "Hello Mr Euler!\n"'`
+Perl is a high-level, general-purpose, interpreted, dynamic programming language.
 
 
-#### rename in each file name the string aaa by bbb
+###### Change, in each file-name, the string aaa by bbb
 
-`ls | perl -ne 'chomp; next unless -e; $o = $_; s/aaa/bbb/; next if -e; rename $o, $_';`
+    ls | perl -ne 'chomp; next unless -e; $o = $_; s/aaa/bbb/; next if -e; rename $o, $_';
 
-#### add first and last column in each line of file foo.txt and print it out
+###### Add the first and last columns, in each line of the file named foo.txt, and print it out
 
-`perl -lane 'print $F[0] + $F[-1]' foo.txt`
+    perl -lane 'print $F[0] + $F[-1]' foo.txt
 
-#### print lines 15 to 17 of file foo.txt
+###### Print lines 15 to 17 of file foo.txt
 
-`perl -ne 'print if 15 .. 17' foo.txt`
+    perl -ne 'print if 15 .. 17' foo.txt
 
-#### a second way to print lines 3 to 5 of file foo.txt
+###### Another way to print lines 3 to 5 of file foo.txt
 
-`perl -pe 'exit if 3<$. && $.<5' foo.txt`
+    perl -pe 'exit if 3<$. && $.<5' foo.txt
 
-#### change all words "foo"s to "bar"s in every .c file and keep backups
+I> ##  Special note about `perl`
+I> There are `many many` ways to do the same thing in `perl`, 
+I> some are better than others, for `differing interpeerations of 
+I> better` 
 
-`perl -p -i.bak -e 's/\bfoo\b/bar/g' *.c`
 
-#### the same but without backup. Remember the flags: "eat the pie"
+###### Change all instances of the word "foo" to "bar" in every `.sql` file, and make backups of the files 
 
-`perl -p -i -e 's/foo/bar/g' *.c`
+    perl -p -i.bak -e 's/\bfoo\b/bar/g' *.sql
 
-#### changes ^M newline characters to newlines
+A handy tip to remember the syntax for the back up switches is : 
 
-`perl  -p -i -e 's/\012?\015/\n/g'  $1`
+    eat the 'pie' : -p -i -e
 
-#### the same but with all files with name filename
 
-`perl -p -i -e  's/foo/bar' `find . -name "filename"`
+###### The same as above, but without making a backup. 
 
-#### substitution can also be applied to binary files like test.ppm
+    perl -p -i -e 's/foo/bar/g' *.sql
 
-`perl -p -i -e 's/255/127/g' test.ppm`
 
-#### substitute "xyz.math" to "abc.math" in every .html file and keep backups
+###### Changes all instances of the ^M newline characters to newlines
 
-`perl -p -i.bak -e 's/xyz\.math/abc\.math/g' *.html`
+    perl  -p -i -e 's/\012?\015/\n/g'  $1
 
-#### insert department name after each title and keep backup
 
-`perl -p -i.bak -e 's#<title>#<title>Harvard .: #i' *.html`
+###### The same but with all files with name filename
 
-#### delete first 10 lines in foo.txt and keep backup foo.txt.bak
+    perl -p -i -e  's/foo/bar' `find . -name "filename"`
 
-`perl -i.bak -ne 'print unless 1 .. 10' foo.txt`
+###### Substitution can also be applied to binary files like test.ppm
 
-#### change isolated occurrence of aaa to bbb in each file *.c or *.h
+    perl -p -i -e 's/255/127/g' test.ppm
 
-`perl -p -i.bak -e 's{\baaa\b}{bbb}g' *.[ch]`
+###### Substitute "xyz.math" to "abc.math" in every .html file and keep backups
 
-#### reverses lines of file foo.txt and print it
+    perl -p -i.bak -e 's/xyz\.math/abc\.math/g' *.html
 
-`perl -e 'print reverse <>' foo.txt`
+###### Insert department name after each title and keep backup
 
-#### find palindromes in a dictionary /usr/share/dict/words
+    perl -p -i.bak -e 's#<title>#<title>Harvard .: #i' *.html
 
-`perl -lne 'print if $_ eq reverse' /usr/share/dict/words`
+###### Delete first 10 lines in foo.txt and keep backup foo.txt.bak
 
-#### reverses paragraphs in file foo.txt
+    perl -i.bak -ne 'print unless 1 .. 10' foo.txt
 
-`perl -00 -e 'print reverse <>' foo.txt`
+###### Change isolated occurrence of aaa to bbb in each file *.c or *.h
 
-#### increments all numbers in foo.tx by 1
+    perl -p -i.bak -e 's{\baaa\b}{bbb}g' *.[ch]
 
-`perl -pe 's/(\d+)/ 1 + $1 /ge' foo.txt`
+###### Reverses lines of file foo.txt and print it
 
-#### reverses order of characters in each line of foo.txt
+    perl -e 'print reverse <>' foo.txt
 
-`perl -nle 'print scalar reverse $_' foo.txt`
+###### Find palindromes in a dictionary /usr/share/dict/words
 
-#### print lines beween START and END in foo.txt to STDOUT
+    perl -lne 'print if $_ eq reverse' /usr/share/dict/words
 
-`perl -ne 'print if /^START$/ .. /^END$/' foo.txt`
+###### Reverse paragraphs in the file foo.txt
 
-#### delete lines beween START and END and backup original file
+    perl -00 -e 'print reverse <>' foo.txt
 
-`perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt`
+###### Increment all numbers in foo.txt by 2
 
-#### look for duplicated words in a line
+    perl -pe 's/(\d+)/ 2 + $1 /ge' foo.txt
 
-`perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi' foo.txt`
+#### Reverse the order of characters in each line of foo.txt
 
-#### start Perl debugger "stand-alone"
+    perl -nle 'print scalar reverse $_' foo.txt
 
-`perl -d -e 42`
+###### Print the lines beween START and END in foo.txt to STDOUT
 
-#### run a Perl program program.pl with warnings
+    perl -ne 'print if /^START$/ .. /^END$/' foo.txt
 
-`perl -w program.pl`
+###### Delete the lines beween START and END, in the file foo.txt and make a backup of the original file
 
-#### run a Perl program program.pl with debugger
+    perl -i.old -ne 'print unless /^START$/ .. /^END$/' foo.txt
 
-`perl -d program.pl`
+###### Look for duplicated words in a line in the file foo.txt
 
-#### Run perl program program.pl, check syntax, print warnings
+    perl -0777 -ne 'print "$.: doubled $_\n" while /\b(\w+)\b\s+\b\1\b/gi' foo.txt
 
-`perl -wc program.pl`
+###### Start the perl debugger in "stand-alone" mode
+
+    perl -d -e 42
+
+###### Run the perl program named program.pl, with warnings enabled
+
+    perl -w program.pl
+
+###### Run the perl program, program.pl with debugger switched on
+
+    perl -d program.pl
+
+###### Run the perl program, program.pl, check it's syntax and also print warnings
+
+    perl -wc program.pl

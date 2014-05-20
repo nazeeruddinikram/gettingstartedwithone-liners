@@ -24,3 +24,27 @@ Finally, remove leading zeroes:
 
 
 ----
+
+#### Number each line in file.txt:
+
+sed = file.txt | sed 'N;s/\n/ /'
+
+#### Replace all occurances of foo with bar in file.txt:
+
+sed 's/foo/bar/g' file.txt
+
+#### Trim leading whitespace in file.txt:
+
+sed 's/^[ \t]*//' file.txt
+
+#### Trim trailing whitespace in file.txt:
+
+sed 's/[ \t]*$//' file.txt
+
+#### Trim leading and trailing whitespace in file.txt:
+
+sed 's/^[ \t]*//;s/[ \t]*$//' file.txt
+
+#### Delete blank lines in file.txt:
+
+sed '/^$/d' file.txt

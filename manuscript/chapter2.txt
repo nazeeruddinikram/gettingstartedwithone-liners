@@ -1,63 +1,56 @@
 # awk
 
-Extract fields 2, 4, and 5 from file.txt:
+AWK is an interpreted programming language designed for text processing and typically used as a data extraction and reporting tool. It is a standard feature of most Unix-like operating systems. 
 
-    awk '{print $2,$4,$5}' input.txt
+The AWK language is a data-driven scripting language consisting of a set of actions to be taken against streams of textual data, either run directly on files or used as part of a pipeline, for purposes of extracting or transforming text.
 
+An AWK program is a series of pattern action pairs, written as:
 
-Print each line where the 5th field is equal to ‘abc123’:
+`''condition'' { ''action'' }`
 
-awk '$5 == "abc123"' file.txt
+Here are some examples of `awk` in action
 
+###### Extract fields 2, 4, and 5 from foo.txt:
 
-Print each line where the 5th field is not equal to ‘abc123’:
-
-awk '$5 != "abc123"' file.txt
-
-
-Print each line whose 7th field matches the regular expression:
-
-awk '$7  ~ /^[a-f]/' file.txt
+    awk '{print $2,$4,$5}' foo.txt
 
 
-Print each line whose 7th field does not match the regular expression:
+###### Print each line where the 5th field is equal to ‘abc123’:
 
-awk '$7 !~ /^[a-f]/' file.txt
-
-
-Get unique entries in file.txt based on column 1 (takes only the first instance):
-
-awk '!arr[$2]++' file.txt
+    awk '$5 == "abc123"' foo.txt
 
 
-Print rows where column 3 is larger than column 5 in file.txt:
+###### Print each line where the 5th field is not equal to ‘abc123’:
 
-awk '$3>$5' file.txt
-
-
-Sum column 1 of file.txt:
-
-awk '{sum+=$1} END {print sum}' file.txt
+    awk '$5 != "abc123"' foo.txt
 
 
-Compute the mean of column 2:
+###### Print each line whose 7th field matches the regular expression:
 
-awk '{x+=$2}END{print x/NR}' file.txt
-Number each line in file.txt:
+    awk '$7  ~ /^[a-f]/' foo.txt
 
-sed = file.txt | sed 'N;s/\n/ /'
-Replace all occurances of foo with bar in file.txt:
 
-sed 's/foo/bar/g' file.txt
-Trim leading whitespace in file.txt:
+###### Print each line whose 7th field does not match the regular expression:
 
-sed 's/^[ \t]*//' file.txt
-Trim trailing whitespace in file.txt:
+    awk '$7 !~ /^[a-f]/' foo.txt
 
-sed 's/[ \t]*$//' file.txt
-Trim leading and trailing whitespace in file.txt:
 
-sed 's/^[ \t]*//;s/[ \t]*$//' file.txt
-Delete blank lines in file.txt:
+###### Get unique entries in foo.txt based on column 1 (takes only the first instance):
 
-sed '/^$/d' file.txt
+    awk '!arr[$2]++' foo.txt
+
+
+###### Print rows where column 3 is larger than column 5 in foo.txt:
+
+    awk '$3>$5' foo.txt
+
+
+###### Sum column 1 of foo.txt:
+
+    awk '{sum+=$1} END {print sum}' foo.txt
+
+
+###### Compute the mean of column 2 from the contents of foo.txt:
+
+    awk '{x+=$2}END{print x/NR}' foo.txt
+
